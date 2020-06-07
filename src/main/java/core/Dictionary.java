@@ -1,7 +1,6 @@
 package core;
 
 import game.GameException;
-import jdk.nashorn.internal.runtime.WithObject;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
@@ -12,7 +11,20 @@ public class Dictionary {
 
     private static final String FILE_NAME = "dicionario.txt";
 
+    private static Dictionary instance;
+
     private List<String> words = new ArrayList<>();
+
+    private Dictionary() {
+        load();
+    }
+
+    public static Dictionary getInstance() {
+        if (instance == null) {
+            instance = new Dictionary();
+        }
+        return instance;
+    }
 
     private void load() {
 
