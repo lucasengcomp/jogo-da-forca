@@ -1,5 +1,6 @@
 package UI;
 
+import java.util.InvalidPropertiesFormatException;
 import java.util.Scanner;
 
 public class Ui {
@@ -12,21 +13,22 @@ public class Ui {
         System.out.println();
     }
 
-    public static char readChar(String text) {
+    @SuppressWarnings("resource")
+    public static char readChar(String text) throws InvalidPropertiesFormatException {
         System.out.println(text + "Digite uma letra");
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
 
         if (line.trim().isEmpty()) {
-            //TODO: verifica se inseriu somente palavras vazias
+            throw new InvalidPropertiesFormatException("Não foi digitada nenhuma letra!");
         }
         if (line.length() > 1) {
-            //TODO: isso é erro
+            throw new InvalidPropertiesFormatException("Digite apenas 1 letra por vez!");
         }
 
         char c = line.charAt(0);
         if (!Character.isLetter(c)) {
-            //TODO: valida se é letra
+            throw new InvalidPropertiesFormatException("Você informou número! :-| Digite apenas letra!");
         }
         //retornou caracter válido
         return c;
