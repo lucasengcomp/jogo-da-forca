@@ -1,6 +1,8 @@
 package core;
 
 import game.GameException;
+import jdk.nashorn.internal.runtime.WithObject;
+import utils.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,4 +27,8 @@ public class Dictionary {
         }
     }
 
+    public Word nextWord() {
+        int pos = RandomUtils.newRandomNumber(0, words.size());
+        return new Word(words.get(pos));
+    }
 }
