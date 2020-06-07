@@ -5,7 +5,6 @@ import java.util.Set;
 
 public class Word {
 
-
     private static final char SECRET_CHAR = '_';
 
     private String originalWord;
@@ -15,7 +14,7 @@ public class Word {
     public Word(String originalWord) {
         this.originalWord = originalWord.toUpperCase();
 
-        char[] chars = originalWord.toCharArray();
+        char[] chars = this.originalWord.toCharArray();
         for (char c : chars) {
             wordChars.add(c);
         }
@@ -27,8 +26,8 @@ public class Word {
 
     public boolean hasChar(char c) {
         //int pos = originalWord.indexOf(c);
-
-        if (originalWord.indexOf(c) > 1) {
+        c = Character.toUpperCase(c);
+        if (originalWord.indexOf(c) > -1) {
             foundChars.add(c);
             return true;
         }
