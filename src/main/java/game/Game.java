@@ -1,5 +1,6 @@
 package game;
 
+import core.Config;
 import core.Dictionary;
 import core.InvalidCharacterException;
 import core.Word;
@@ -9,7 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Game {
-    private static int MAX_ERRORS = 5;
 
     public void start() {
 
@@ -22,14 +22,15 @@ public class Game {
 
         Set<Character> usedChars = new HashSet<>();
         char c;
+        int maxErrors = Integer.parseInt(Config.get("maxErrors"));
         int errorCount = 0;
-
+        Ui.print("Voce pode errar no máximo " + maxErrors + " vezes");
         while (true) {
             Ui.print(word);
             Ui.printNewLine();
 
             try {
-                c = Ui.readChar("Informe uma letra");
+                c = Ui.readChar("Informe uma letra ");
 
                 if (usedChars.contains(c)) {
                     throw new InvalidCharacterException("Esta letra já foi informada anteriormente");
@@ -41,19 +42,19 @@ public class Game {
                 } else {
                     errorCount++;
 
-                    if (errorCount < MAX_ERRORS) {
-                        Ui.print("Eita, você ainda tem " + (MAX_ERRORS - errorCount) + " chances");
+                    if (errorCount < maxErrors) {
+                        Ui.print("Eita, você ainda tem " + (maxErrors - errorCount) + " chances");
                     }
                 }
                 Ui.printNewLine();
 
                 if (word.discovered()) {
-                    Ui.print("Parabéns! Conseguiu acertar toda a palavra" + word.getOriginalWord());
+                    Ui.print("Parabéns! Conseguiu acertar toda a palavra " + word.getOriginalWord());
                     Ui.print("Fim do jogo!");
                     break;
                 }
 
-                if (errorCount == MAX_ERRORS) {
+                if (errorCount == maxErrors) {
                     Ui.print("Não deu. Você errou a palavra. A palavra era: " + word.getOriginalWord());
                     Ui.print("Fim do jogo!");
                     break;
