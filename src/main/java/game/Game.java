@@ -12,8 +12,7 @@ import java.util.Set;
 public class Game {
 
     public void start() {
-
-        Ui.print("Bem vindo ao jogo da forca");
+        Ui.print("Bem vindo ao jogo da forca\n");
 
         Dictionary dictionary = Dictionary.getInstance();
         Word word = dictionary.nextWord();
@@ -25,6 +24,7 @@ public class Game {
         int maxErrors = Integer.parseInt(Config.get("maxErrors"));
         int errorCount = 0;
         Ui.print("Voce pode errar no máximo " + maxErrors + " vezes");
+
         while (true) {
             Ui.print(word);
             Ui.printNewLine();
